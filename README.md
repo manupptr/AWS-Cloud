@@ -11,7 +11,7 @@ In this chapter, i will create the labs to show the AWS resource creation throug
     --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=MyVpc}]'
 ```
 
-2.The output for the above create-vpc command will be in below format:
+The output for the above create-vpc command will be in below format:
 ```
 Vpc:
   CidrBlock: 10.0.0.0/16
@@ -27,7 +27,7 @@ Vpc:
   OwnerId: '1234567890'
 ```
 
-3.To check our vpc is created or not ,the below command is used .it lists all the vpcs present in our aws:
+To check our vpc is created or not ,the below command is used .it lists all the vpcs present in our aws:
 ```
 Vpcs:
 - CidrBlock: 172.31.0.0/16
@@ -62,13 +62,13 @@ Vpcs:
   VpcId: vpc-009ec6504e1eaceb3
 ```
 
-4.To check the status of certain vpc with that vpc-id, the below command is used:
+To check the status of certain vpc with that vpc-id, the below command is used:
 
 ```
 aws ec2 describe-vpcs --vpc-id <vpc-id>
 ```
 
-5.The output for the vpc status checked with a certain vpc-id (json format)
+The output for the vpc status checked with a certain vpc-id (json format)
 
 ```
 {
@@ -101,3 +101,8 @@ aws ec2 describe-vpcs --vpc-id <vpc-id>
 }
 ```
 
+2.To delete vpc ,The below command is used
+
+```
+aws ec2 delete-vpc --vpc-id <vpc-id>
+```
