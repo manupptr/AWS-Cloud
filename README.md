@@ -24,3 +24,29 @@ Vpcs:
   OwnerId: '1234567890'
   State: available
   ```
+
+The below command is used to create the vpc
+```
+ aws ec2 create-vpc \
+    --cidr-block 10.0.0.0/16 \
+    --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=MyVpc}]'
+```
+
+The output for the above create-vpc command will be in below format
+```
+Vpc:
+  CidrBlock: 10.0.0.0/16
+  CidrBlockAssociationSet:
+  - AssociationId: vpc-cidr-assoc-030a4dde2986d1e09
+    CidrBlock: 10.0.0.0/16
+    CidrBlockState:
+      State: associated
+  DhcpOptionsId: dopt-0b79acfe1af8ee90b
+  InstanceTenancy: default
+  Ipv6CidrBlockAssociationSet: []
+  IsDefault: false
+  OwnerId: '1234567890'
+```
+
+
+
