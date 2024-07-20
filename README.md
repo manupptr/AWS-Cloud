@@ -69,6 +69,8 @@ aws ec2 describe-vpcs --vpc-id <vpc-id>
 ```
 
 5.The output for the vpc status checked with a certain vpc-id (json format)
+
+```
 {
     "Vpcs": [
         {
