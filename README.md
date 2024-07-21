@@ -175,3 +175,6 @@ modify the below actions under the steps section in github-actions-demo-yml
 - run: aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=MyVpc}]'
 - run: aws ec2 descibe-vpcs
 ```
+
+When ever we push the github-actions-demo-yml file to our github ,it creates the vpc and describe the vpcs in our aws account
+Otherwiswe we can run the github action manually when ever we need by modifing the github-actions-demo-yml file like below
