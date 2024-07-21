@@ -160,7 +160,12 @@ aws configure
 ```
 
 we can modify the github actions in our code
-For example if we want to list the s3 buckets through github actions,we have to add the below github action under the steps section in the github-actions-demo-yml file
+For example if we want to list the s3 buckets through github actions,we have to add the below github actions under the steps section in the github-actions-demo-yml file
 ```
--run: aws s3 ls
+- uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 ```
+
