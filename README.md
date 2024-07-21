@@ -169,3 +169,9 @@ For example if we want to list the s3 buckets through github actions,we have to 
           aws-region: us-east-1
 ```
 
+To create vpc and describe vpcs through github actions using aws-cli
+modify the below actions under the steps section in github-actions-demo-yml
+```
+- run: aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=MyVpc}]'
+- run: aws ec2 descibe-vpcs
+```
