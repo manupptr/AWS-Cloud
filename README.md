@@ -160,7 +160,7 @@ aws configure
 ```
 
 we can modify the github actions in our code
-For example if we want to list the s3 buckets through github actions,we have to add the below github action under the steps section in the above code
+For example if we want to list the s3 buckets through github actions,we have to add the below github action under the steps section in the github-actions-demo-yml file
 ```
 -run: aws s3 ls
 ```
