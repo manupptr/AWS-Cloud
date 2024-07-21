@@ -135,3 +135,32 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 ```
+
+Note:Before performing the below actions we need to install aws-cli and configure the aws-cli with access key and secret access key in our local machine
+
+How to install aws-cli according to our machine type like linux,windows and mac, follow the steps provided in the below link
+```
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+```
+
+To confirm the aws-cli is installed or not ,enter the below command in your local terminal
+```
+aws --version
+```
+
+If the aws-cli is installed ,the output will be looks like below
+
+```
+aws-cli/2.17.2 Python/3.11.8 Windows/10 exe/AMD64
+```
+
+To configure the aws-cli ,use the below command and enter the access key,secret access key,region and output format
+```
+aws configure
+```
+
+we can modify the github actions in our code
+For example if we want to list the s3 buckets through github actions,we have to add the below github action under the steps section in the above code
+```
+-run: aws s3 ls
+```
