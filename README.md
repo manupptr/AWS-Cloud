@@ -107,7 +107,7 @@ The output for the vpc status checked with a certain vpc-id (json format)
 aws ec2 delete-vpc --vpc-id <vpc-id>
 ```
 
-# Github actions and workflows
+### Github actions and workflows
 
 create a .github/workflows directory under the root directory (AWS Cloud)
 ```
