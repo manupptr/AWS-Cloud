@@ -195,7 +195,7 @@ on:
         required: false
         type: string
 ```
-when we run the workflow manually in github actions, it creates the resources for each run 
+when we run the workflow manually in github actions, it creates the resources for each run. 
 For example if we run the workflow for 3 times,it creates 3 vpcs in our slected region
 
 
