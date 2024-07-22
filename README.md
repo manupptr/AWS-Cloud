@@ -192,4 +192,7 @@ on:
     inputs:
       my_input:
         description: my input description
-        
+        required: false
+        type: string
+```
+
