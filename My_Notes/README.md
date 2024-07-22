@@ -21,3 +21,9 @@ https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations
 Overview working of cloudformation:
 **Template:** It is a text file written in either json or yaml format.it contains the required infrastructure resources that we want to create
 **stack:** It is a group of resources
+
+**Overview of stack Creation:**
+
+Template -----> CreateStack(API action) -----> Stack
+
+* By using the CreateStack API action,We request the cloudFormation to create a stack for our template
