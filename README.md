@@ -220,3 +220,87 @@ Resources:
       - key: department
         value: DevOps
 ```
+### creating the stack through AWS-CLI
+
+To create the stack for creating vpc by using the same above CFT.The below command is used
+```
+aws cloudformation create-stack --stack-name mycfnstack --template-body file://createVPC.yaml
+```
+The stack will be created and the output will be look like below
+```
+{
+    "StackId": "arn:aws:cloudformation:us-east-1:381492281943:stack/mycfnstack/c19f4880-485b-11ef-9e10-1227813a2bf9"
+}
+```
+
+To describe the stack events.The below command is used
+```
+aws cloudformation describe-stack-events --stack-name mycfnstack
+```
+The output for the above command will be look like below
+```
+{
+    "StackEvents": [
+        {
+            "StackId": "arn:aws:cloudformation:us-east-1:381492281943:stack/mycfnstack/c19f4880-485b-11ef-9e10-1227813a2bf9",
+            "EventId": "caf67cf0-485b-11ef-9f40-0eb3646ef60b",
+            "StackName": "mycfnstack",
+            "LogicalResourceId": "mycfnstack",
+            "PhysicalResourceId": "arn:aws:cloudformation:us-east-1:381492281943:stack/mycfnstack/c19f4880-485b-11ef-9e10-1227813a2bf9",
+            "ResourceType": "AWS::CloudFormation::Stack",
+            "Timestamp": "2024-07-22T18:54:15.602000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE"
+        },
+        {
+            "StackId": "arn:aws:cloudformation:us-east-1:381492281943:stack/mycfnstack/c19f4880-485b-11ef-9e10-1227813a2bf9",
+            "EventId": "MyCfnVPC-CREATE_COMPLETE-2024-07-22T18:54:14.922Z",
+            "StackName": "mycfnstack",
+            "LogicalResourceId": "MyCfnVPC",
+            "PhysicalResourceId": "vpc-016581e2c3058c468",
+            "ResourceType": "AWS::EC2::VPC",
+            "Timestamp": "2024-07-22T18:54:14.922000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "ResourceProperties": "{\"CidrBlock\":\"192.168.0.0/16\",\"Tags\":[{\"Value\":\"MyTestVPC\",\"Key\":\"Name\"},{\"Value\":\"Prod\",\"Key\":\"environment\"},{\"Value\":\"DevOps\",\"Key\":\"department\"}]}"
+        },
+        {
+            "StackId": "arn:aws:cloudformation:us-east-1:381492281943:stack/mycfnstack/c19f4880-485b-11ef-9e10-1227813a2bf9",
+            "EventId": "MyCfnVPC-CREATE_IN_PROGRESS-2024-07-22T18:54:03.896Z",
+            "StackName": "mycfnstack",
+            "LogicalResourceId": "MyCfnVPC",
+            "PhysicalResourceId": "vpc-016581e2c3058c468",
+            "ResourceType": "AWS::EC2::VPC",
+            "Timestamp": "2024-07-22T18:54:03.896000+00:00",
+            "ResourceStatus": "CREATE_IN_PROGRESS",
+            "ResourceStatusReason": "Resource creation Initiated",
+            "ResourceProperties": "{\"CidrBlock\":\"192.168.0.0/16\",\"Tags\":[{\"Value\":\"MyTestVPC\",\"Key\":\"Name\"},{\"Value\":\"Prod\",\"Key\":\"environment\"},{\"Value\":\"DevOps\",\"Key\":\"department\"}]}"
+        },
+        {
+            "StackId": "arn:aws:cloudformation:us-east-1:381492281943:stack/mycfnstack/c19f4880-485b-11ef-9e10-1227813a2bf9",
+            "EventId": "MyCfnVPC-CREATE_IN_PROGRESS-2024-07-22T18:54:02.516Z",
+            "StackName": "mycfnstack",
+            "LogicalResourceId": "MyCfnVPC",
+            "PhysicalResourceId": "",
+            "ResourceType": "AWS::EC2::VPC",
+            "Timestamp": "2024-07-22T18:54:02.516000+00:00",
+            "ResourceStatus": "CREATE_IN_PROGRESS",
+            "ResourceProperties": "{\"CidrBlock\":\"192.168.0.0/16\",\"Tags\":[{\"Value\":\"MyTestVPC\",\"Key\":\"Name\"},{\"Value\":\"Prod\",\"Key\":\"environment\"},{\"Value\":\"DevOps\",\"Key\":\"department\"}]}"
+        },
+        {
+            "StackId": "arn:aws:cloudformation:us-east-1:381492281943:stack/mycfnstack/c19f4880-485b-11ef-9e10-1227813a2bf9",
+            "EventId": "c1a19270-485b-11ef-9e10-1227813a2bf9",
+            "StackName": "mycfnstack",
+            "LogicalResourceId": "mycfnstack",
+            "PhysicalResourceId": "arn:aws:cloudformation:us-east-1:381492281943:stack/mycfnstack/c19f4880-485b-11ef-9e10-1227813a2bf9",
+            "ResourceType": "AWS::CloudFormation::Stack",
+            "Timestamp": "2024-07-22T18:54:00+00:00",
+            "ResourceStatus": "CREATE_IN_PROGRESS",
+            "ResourceStatusReason": "User Initiated"
+        }
+    ]
+}
+```
+
+TO list the stacks in cloudformation.The below command is used
+```
+aws cloudformation describe-stacks
+```
