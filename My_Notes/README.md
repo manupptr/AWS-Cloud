@@ -63,5 +63,7 @@ Outputs:
 From the above CFT format.The main necessary sections are
 
 **AWSTemplateFormatVersion: "version date"**
+
 **Description:**
+
 **Resources:**
