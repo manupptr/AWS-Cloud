@@ -3,11 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       my_input:
-        description: my input description
         required: false
         type: string
 jobs:
-  create-vpc-cft:
+  create-vpc:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
