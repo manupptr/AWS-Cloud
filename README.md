@@ -199,7 +199,7 @@ when we run the workflow manually in github actions, it creates the resources fo
 For example if we run the workflow for 3 times,it creates 3 vpcs in our slected region
 
 
-**Note**: For every resource category in aws,they have restrictions while creating the resouces
+**Note**: For every resource category in aws,they have restrictions like quota while creating the resouces
 
 **Quota**: There is a certain limit in creating the resources according to the resource category
 * we can raise a quote request when the resources limit is exceeded
@@ -209,3 +209,18 @@ For example if we run the workflow for 3 times,it creates 3 vpcs in our slected 
   Ex: aws ec2 create-vpc, aws ec2 run-instances etc....
 * To get the idempotency while creating the resources.we can use the Iac tools like Terraform,cloudFormation,CDK etc...
 
+
+### cloud Formation
+
+cloud Formation is a Iac service in AWS
+* it is idempotent in nature
+* it a regional service
+* Ex end point: cloudformation.us-east-1.amazonaws.com
+
+cloud formation API actions Reference will be in below documentation
+```
+https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations.html
+```
+Overview working of cloudformation:
+**Template:** It is a text file written in either json or yaml format.it contains the required infrastructure resources that we want to create
+**stack:** It is a group of resources
