@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description:
   This template creates a vpc in selected region
-  author: Manu
-  organization: TEST
+  author:Manu
+  organization:TEST
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
