@@ -8,9 +8,9 @@ Resources:
     Properties:
       CidrBlock: 10.0.0.0/16
       Tags:
-      - key: Name
-        value: MyTestVPC
-      - key: environment
-        value: Prod
-      - key: department
-        value: DevOps
+        - key: Name
+          value: MyTestVPC
+        - key: environment
+          value: Prod
+        - key: department
+          value: DevOps
