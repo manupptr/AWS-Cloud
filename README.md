@@ -25,6 +25,11 @@ Vpc:
   Ipv6CidrBlockAssociationSet: []
   IsDefault: false
   OwnerId: '1234567890'
+    State: available
+    Tags:
+    - Key: Name
+      Value: MyVpc
+  VpcId: vpc-009ec6504e1eaceb3
 ```
 
 To check our vpc is created or not ,the below command is used .it lists all the vpcs present in our aws:
@@ -176,5 +181,15 @@ modify the below actions under the steps section in github-actions-demo-yml
 - run: aws ec2 descibe-vpcs
 ```
 
-When ever we push the github-actions-demo-yml file to our github ,it creates the vpc and describe the vpcs in our aws account
-Otherwiswe we can run the github action manually when ever we need by modifing the github-actions-demo-yml file like below
+When ever we push the github-actions-demo-yml file to our github ,it creates the vpc and describe the vpcs in our aws account with the below action
+```
+on: [push]
+```
+Otherwiswe we can run the github action manually when ever we need by modifing the github-actions-demo-yml file by replacing the above action with below one
+```
+on:
+  workflow_dispatch:
+    inputs:
+      my_input:
+        description: my input description
+        
