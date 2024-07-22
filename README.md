@@ -300,7 +300,7 @@ The output for the above command will be look like below
 }
 ```
 
-TO list the stacks in cloudformation.The below command is used
+To list the stacks in cloudformation.The below command is used
 ```
 aws cloudformation describe-stacks
 ```

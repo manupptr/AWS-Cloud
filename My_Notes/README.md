@@ -29,7 +29,7 @@ Template -----> CreateStack(API action) -----> Stack
 * By using the CreateStack API action,We will request the cloudFormation service to create a stack for our template
 
 The following example shows the structure of a YAML-formatted template with all available sections:
-```
+
 AWSTemplateFormatVersion: "version date"
 
 Description:
@@ -58,4 +58,10 @@ Resources:
 
 Outputs:
   set of outputs
-```
+
+
+From the above CFT format.The main necessary sections are
+
+**AWSTemplateFormatVersion: "version date"**
+**Description:**
+**Resources:**
