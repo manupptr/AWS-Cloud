@@ -304,3 +304,10 @@ To list the stacks in cloudformation.The below command is used
 ```
 aws cloudformation describe-stacks
 ```
+
+To delete the stack by using the below command.Then our stack gets deleted
+```
+aws cloudformation delete-stack --stack-name mycfnstack
+```
+
+### creating the stack in cloudformation through github actions
