@@ -203,3 +203,9 @@ For example if we run the workflow for 3 times,it creates 3 vpcs in our slected 
 
 **Quota**: There is a certain limit in creating the resources according to the resource category
 * we can raise a quote request when the resources limit is exceeded
+
+**Idempotency**: The resource should be created by the code,if there is no resource exist in that category already.otherwise it shouldn't create the resource is known as idempotency in nature
+* The commands that we use in shell scripts and pipeline to create the resources are not idempotent in nature
+  Ex: aws ec2 create-vpc, aws ec2 run-instances etc....
+* To get the idempotency while creating the resources.we can use the Iac tools like Terraform,cloudFormation,CDK etc...
+
