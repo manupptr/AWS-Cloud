@@ -26,4 +26,36 @@ Overview working of cloudformation:
 
 Template -----> CreateStack(API action) -----> Stack
 
-* By using the CreateStack API action,We request the cloudFormation to create a stack for our template
+* By using the CreateStack API action,We will request the cloudFormation service to create a stack for our template
+
+The following example shows the structure of a YAML-formatted template with all available sections:
+```
+AWSTemplateFormatVersion: "version date"
+
+Description:
+  String
+
+Metadata:
+  template metadata
+
+Parameters:
+  set of parameters
+
+Rules:
+  set of rules
+
+Mappings:
+  set of mappings
+
+Conditions:
+  set of conditions
+
+Transform:
+  set of transforms
+
+Resources:
+  set of resources
+
+Outputs:
+  set of outputs
+```
