@@ -199,3 +199,24 @@ when we run the workflow manually in github actions, it creates the resources fo
 For example if we run the workflow for 3 times,it creates 3 vpcs in our slected region
 
 
+### VPC creation through Cloudformation template
+
+Creating a YAML Template to create a vpc
+```
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  This template creates a vpc in selected region
+  author:Manu
+Resources:
+  MyCfnVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      Tags:
+      - key: Name
+        value: MyTestVPC
+      - key: environment
+        value: Prod
+      - key: department
+        value: DevOps
+```
