@@ -195,3 +195,11 @@ on:
         required: false
         type: string
 ```
+when we run the workflow manually in github actions, it creates the resources for each run 
+For example if we run the workflow for 3 times,it creates 3 vpcs in our slected region
+
+
+Note: For every resource category in aws,they have restrictions while creating the resouces
+
+**Quota**: There is a certain limit in creating the resources according to the resource category
+ we can raise a quote request when the resources limit is exceeded
