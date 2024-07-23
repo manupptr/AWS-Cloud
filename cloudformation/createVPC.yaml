@@ -15,3 +15,5 @@ Resources:
         Value: Prod
       - Key: department
         Value: DevOps
+      - key: Region
+        value: IAD
