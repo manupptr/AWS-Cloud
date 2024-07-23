@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description:
   This template creates a vpc in selected region
-  author:Manu
+  author:Manu.P
   organization:TEST
 Resources:
   MyCfnVPC:
@@ -10,7 +10,7 @@ Resources:
       CidrBlock: 192.168.0.0/16
       Tags:
       - Key: Name
-        Value: MyOwnVPC
+        Value: MyTestVPC
       - Key: environment
         Value: Prod
       - Key: department
