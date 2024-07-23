@@ -10,8 +10,10 @@ Resources:
       CidrBlock: 192.168.0.0/16
       Tags:
       - Key: Name
-        Value: MyTestVPC
+        Value: MyOwnVPC
       - Key: environment
         Value: Prod
       - Key: department
         Value: DevOps
+      - key: Region
+        value: IAD
