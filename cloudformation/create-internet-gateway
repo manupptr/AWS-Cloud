@@ -1,10 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: VPC architecture
 Resources:
-  # Internet Gateway
-  InternetGateway:
-    Type: 'AWS::EC2::InternetGateway'
+  PublicSubnet:
+    Type: 'AWS::EC2::Subnet'
     Properties: 
+      VpcId: !Ref VPC
+      CidrBlock: '10.0.1.0/24'
+      MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: my-igw
+          Value: my-public-subnet
