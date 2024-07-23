@@ -311,3 +311,30 @@ aws cloudformation delete-stack --stack-name mycfnstack
 ```
 
 ### creating the stack in cloudformation through github actions
+
+CReate a create-vpc-cft-github.yaml in the .github/workflows directory and place the below content in that file
+````
+name: cfn vpc github action
+on:
+  workflow_dispatch:
+    inputs:
+      my_input:
+        description: my input description
+        required: false
+        type: string
+jobs:
+  cft-vpc-github-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - run: aws cloudformation create-stack --stack-name mycfnstack --template-body=file://cloudformation/createVPC.yaml
+      - run: sleep 20
+      - run: aws cloudformation describe-stack-events --stack-name mycfnstack
+```
+when we run the above workflow in the actions in github.The above workflow creates a stack in cloudformation and describes the stack-events
