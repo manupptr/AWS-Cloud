@@ -10,10 +10,8 @@ Resources:
       CidrBlock: 192.168.0.0/16
       Tags:
       - Key: Name
-        Value: MyStageVPC
+        Value: MyTestVPC
       - Key: environment
         Value: Prod
       - Key: department
-        Value: AWS Cloud
-      - key: region
-        value: IAD
+        Value: DevOps
