@@ -72,7 +72,7 @@ Resources:
     Type: 'AWS::EC2::Route'
     Properties: 
       RouteTableId: !Ref PublicRouteTable
-      DestinationCidrBlock: '0.0.0.0/0'
+      DestinationCidrBlock: '10.0.1.0/24'
       GatewayId: !Ref InternetGateway
 
   # Associate Public Subnet with Public Route Table
@@ -103,7 +103,7 @@ Resources:
     Type: 'AWS::EC2::Route'
     Properties: 
       RouteTableId: !Ref PrivateRouteTable
-      DestinationCidrBlock: '0.0.0.0/0'
+      DestinationCidrBlock: '1.0.2.0/0'
       NatGatewayId: !Ref NatGateway
 
   # Associate Private Subnet with Private Route Table
@@ -112,20 +112,3 @@ Resources:
     Properties: 
       SubnetId: !Ref PrivateSubnet
       RouteTableId: !Ref PrivateRouteTable
-
-Outputs:
-  VPCId:
-    Description: 'VPC Id'
-    Value: !Ref VPC
-  PublicSubnetId:
-    Description: 'Public Subnet Id'
-    Value: !Ref PublicSubnet
-  PrivateSubnetId:
-    Description: 'Private Subnet Id'
-    Value: !Ref PrivateSubnet
-  InternetGatewayId:
-    Description: 'Internet Gateway Id'
-    Value: !Ref InternetGateway
-  NatGatewayId:
-    Description: 'NAT Gateway Id'
-    Value: !Ref NatGateway
