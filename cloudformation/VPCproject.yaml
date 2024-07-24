@@ -61,4 +61,35 @@ Resources:
       VpcId: vpc-0c3b194c7a8b292c7
       Tags:
         - Key: Name
-          Value: MyPrivateRouteTable     
+          Value: MyPrivateRouteTable
+
+  # Public Route to Internet Gateway
+  PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: rtb-0dd99b8291018a0cc
+      DestinationCidrBlock: 10.0.1.0/24
+      GatewayId: igw-09c02c91d3ffe6943
+
+  # Associate Public Subnet with Public Route Table
+  PublicSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: subnet-0823e306bf9ff3da5
+      RouteTableId: rtb-0dd99b8291018a0cc
+
+  # NAT Gateway
+  MyNatGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId:
+        Fn::GetAtt:
+          - MyElasticIP
+          - AllocationId
+      SubnetId: subnet-0823e306bf9ff3da5
+
+  # Elastic IP for NAT Gateway
+  MyElasticIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
