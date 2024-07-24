@@ -61,4 +61,4 @@ Resources:
       VpcId: vpc-0c3b194c7a8b292c7
       Tags:
         - Key: Name
-          Value: MyPrivateRouteTable       
+          Value: MyPrivateRouteTable     
