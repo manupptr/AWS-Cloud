@@ -95,12 +95,12 @@ Resources:
       Domain: vpc
 
   # Private Route to NAT Gateway
-  PrivateRoute:
-    Type: AWS::EC2::Route
-    Properties:
-      RouteTableId: rtb-02cd846f173a3fa35
-      DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: nat-0936eac64bea7cca3
+  # PrivateRoute:
+  #   Type: AWS::EC2::Route
+  #   Properties:
+  #     RouteTableId: rtb-02cd846f173a3fa35
+  #     DestinationCidrBlock: 0.0.0.0/0
+  #     NatGatewayId: nat-0936eac64bea7cca3
 
   # Associate Private Subnet with Private Route Table
   PrivateSubnetRouteTableAssociation:
