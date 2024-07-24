@@ -68,7 +68,7 @@ Resources:
     Type: AWS::EC2::Route
     Properties:
       RouteTableId: rtb-0dd99b8291018a0cc
-      DestinationCidrBlock: 10.0.0.0/24
+      DestinationCidrBlock: 0.0.0.0/0
       GatewayId: igw-09c02c91d3ffe6943
 
   # Associate Public Subnet with Public Route Table
