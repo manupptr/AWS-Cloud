@@ -19,3 +19,46 @@ Resources:
       Tags:
         - Key: Name
           Value: Manu-InternetGateway
+# Attach Internet Gateway to VPC
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: vpc-0c3b194c7a8b292c7
+      InternetGatewayId: igw-09c02c91d3ffe6943
+  # Public Subnet
+  MyPublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: vpc-0c3b194c7a8b292c7
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: us-east-2b
+      Tags:
+        - Key: Name
+          Value: MyPublicSubnet
+  # Private Subnet
+  MyPrivateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: vpc-0c3b194c7a8b292c7
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: us-east-2b  # Specify your availability zone
+      Tags:
+        - Key: Name
+          Value: MyPrivateSubnet
+  # Public Route Table
+  MyPublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: vpc-0c3b194c7a8b292c7
+      Tags:
+        - Key: Name
+          Value: MyPublicRouteTable
+
+  # Private Route Table
+  MyPrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: vpc-0c3b194c7a8b292c7
+      Tags:
+        - Key: Name
+          Value: MyPrivateRouteTable       
