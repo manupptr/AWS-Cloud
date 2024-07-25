@@ -2,25 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: vpc project
 
 Resources:
-Parameters:
-  ExistingVpcId:
-    Description: "The ID of the existing VPC"
-    Type: String
-  ExistingInternetGatewayId:
-    Description: "The ID of the existing Internet Gateway"
-    Type: String
-  ExistingPublicRouteTableId:
-    Description: "The ID of the existing Public Route Table"
-    Type: String
-  ExistingPublicSubnetId:
-    Description: "The ID of the existing Public Subnet"
-    Type: String
-  ExistingPrivateRouteTableId:
-    Description: "The ID of the existing Private Route Table"
-    Type: String
-  ExistingPrivateSubnetId:
-    Description: "The ID of the existing Private Subnet"
-    Type: String
 
 #VPC
   MyVPC:
