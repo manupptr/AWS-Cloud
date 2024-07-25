@@ -78,6 +78,12 @@ Resources:
       SubnetId: subnet-0823e306bf9ff3da5
       RouteTableId: rtb-0dd99b8291018a0cc
 
+  # Elastic IP for NAT Gateway
+  MyElasticIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+
   # NAT Gateway
   MyNatGateway:
     Type: AWS::EC2::NatGateway
@@ -88,19 +94,13 @@ Resources:
           - AllocationId
       SubnetId: subnet-0823e306bf9ff3da5
 
-  # Elastic IP for NAT Gateway
-  MyElasticIP:
-    Type: AWS::EC2::EIP
+  Private Route to NAT Gateway
+  PrivateRoute:
+    Type: AWS::EC2::Route
     Properties:
-      Domain: vpc
-
-  # Private Route to NAT Gateway
-  # PrivateRoute:
-  #   Type: AWS::EC2::Route
-  #   Properties:
-  #     RouteTableId: rtb-02cd846f173a3fa35
-  #     DestinationCidrBlock: 0.0.0.0/0
-  #     NatGatewayId: nat-0936eac64bea7cca3
+      RouteTableId: rtb-02cd846f173a3fa35
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: nat-0936eac64bea7cca3
 
   # Associate Private Subnet with Private Route Table
   PrivateSubnetRouteTableAssociation:
