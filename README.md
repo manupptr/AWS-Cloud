@@ -338,8 +338,6 @@ jobs:
       - run: aws cloudformation describe-stack-events --stack-name mycfnstack
 ```
 
-when we run the above workflow in the actions in github.The above workflow creates a stack in cloudformation and describes the stack-events
-
 
 Task: creation of vpc with 1 private and public subnets attached to 1 public and private route tables and allowing traffic of private subnet from NAT gateway and internet gateway to public subnet
 
