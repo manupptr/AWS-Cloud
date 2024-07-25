@@ -341,6 +341,7 @@ when we run the above workflow in the actions in github.The above workflow creat
 
 
 Task: creation of vpc with 1 private and public subnets attached to 1 public and private route tables and allowing traffic of private subnet from NAT gateway and internet gateway to public subnet
+
 ```
 AWSTemplateFormatVersion: '2010-09-09'
 Description: vpc project
