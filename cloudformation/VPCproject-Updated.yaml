@@ -1,75 +1,58 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: vpc project
+Description: VPC project
 
 Resources:
-Parameters:
-  ExistingVpcId:
-    Description: "The ID of the existing VPC"
-    Type: String
-  ExistingInternetGatewayId:
-    Description: "The ID of the existing Internet Gateway"
-    Type: String
-  ExistingPublicRouteTableId:
-    Description: "The ID of the existing Public Route Table"
-    Type: String
-  ExistingPublicSubnetId:
-    Description: "The ID of the existing Public Subnet"
-    Type: String
-  ExistingPrivateRouteTableId:
-    Description: "The ID of the existing Private Route Table"
-    Type: String
-  ExistingPrivateSubnetId:
-    Description: "The ID of the existing Private Subnet"
-    Type: String
-
-#VPC
+  # VPC
   MyVPC:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: 10.0.0.0/16
-      EnableDnsSupport: true
-      EnableDnsHostnames: true
       Tags:
         - Key: Name
           Value: Manu-VPC
-#Internetgateway
+
+  # Internet Gateway
   MyInternetGateway:
     Type: AWS::EC2::InternetGateway
     Properties:
       Tags:
         - Key: Name
           Value: Manu-InternetGateway
-# Attach Internet Gateway to VPC
+
+  # Attach Internet Gateway to VPC
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
-      VpcId: vpc-0c3b194c7a8b292c7
-      InternetGatewayId: igw-09c02c91d3ffe6943
+      VpcId: !Ref MyVPC
+      InternetGatewayId: !Ref MyInternetGateway
+
   # Public Subnet
   MyPublicSubnet:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: vpc-0c3b194c7a8b292c7
+      VpcId: !Ref MyVPC
       CidrBlock: 10.0.1.0/24
       AvailabilityZone: us-east-2b
       Tags:
         - Key: Name
           Value: MyPublicSubnet
+
   # Private Subnet
   MyPrivateSubnet:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: vpc-0c3b194c7a8b292c7
+      VpcId: !Ref MyVPC
       CidrBlock: 10.0.2.0/24
-      AvailabilityZone: us-east-2b  # Specify your availability zone
+      AvailabilityZone: us-east-2b
       Tags:
         - Key: Name
           Value: MyPrivateSubnet
+
   # Public Route Table
   MyPublicRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: vpc-0c3b194c7a8b292c7
+      VpcId: !Ref MyVPC
       Tags:
         - Key: Name
           Value: MyPublicRouteTable
@@ -78,7 +61,7 @@ Parameters:
   MyPrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: vpc-0c3b194c7a8b292c7
+      VpcId: !Ref MyVPC
       Tags:
         - Key: Name
           Value: MyPrivateRouteTable
@@ -87,16 +70,16 @@ Parameters:
   PublicRoute:
     Type: AWS::EC2::Route
     Properties:
-      RouteTableId: rtb-0dd99b8291018a0cc
+      RouteTableId: !Ref MyPublicRouteTable
       DestinationCidrBlock: 0.0.0.0/0
-      GatewayId: igw-09c02c91d3ffe6943
+      GatewayId: !Ref MyInternetGateway
 
   # Associate Public Subnet with Public Route Table
   PublicSubnetRouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: subnet-0823e306bf9ff3da5
-      RouteTableId: rtb-0dd99b8291018a0cc
+      SubnetId: !Ref MyPublicSubnet
+      RouteTableId: !Ref MyPublicRouteTable
 
   # Elastic IP for NAT Gateway
   MyElasticIP:
@@ -112,19 +95,20 @@ Parameters:
         Fn::GetAtt:
           - MyElasticIP
           - AllocationId
-      SubnetId: subnet-0823e306bf9ff3da5
+      SubnetId: !Ref MyPublicSubnet
 
-  Private Route to NAT Gateway
+  # Private Route to NAT Gateway
   PrivateRoute:
     Type: AWS::EC2::Route
     Properties:
-      RouteTableId: rtb-02cd846f173a3fa35
+      RouteTableId: !Ref MyPrivateRouteTable
       DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: nat-0936eac64bea7cca3
+      NatGatewayId:
+        Ref: MyNatGateway
 
   # Associate Private Subnet with Private Route Table
   PrivateSubnetRouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: subnet-03c2ea0560678cc0e
-      RouteTableId: rtb-02cd846f173a3fa35
+      SubnetId: !Ref MyPrivateSubnet
+      RouteTableId: !Ref MyPrivateRouteTable
