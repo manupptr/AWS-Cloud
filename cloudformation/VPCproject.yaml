@@ -1,6 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: vpc project
-
+Description: VPC with 1 public and private subnets attached to 1 public and private route tables and allowing traffic to public subnet through internet gateway and allowing traffic from NAT gateway to private subnet
 Resources:
 
 #VPC
@@ -13,6 +12,7 @@ Resources:
       Tags:
         - Key: Name
           Value: Manu-VPC
+
 #Internetgateway
   MyInternetGateway:
     Type: AWS::EC2::InternetGateway
@@ -20,12 +20,14 @@ Resources:
       Tags:
         - Key: Name
           Value: Manu-InternetGateway
+
 # Attach Internet Gateway to VPC
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
       VpcId: vpc-0c3b194c7a8b292c7
       InternetGatewayId: igw-09c02c91d3ffe6943
+
   # Public Subnet
   MyPublicSubnet:
     Type: AWS::EC2::Subnet
@@ -36,6 +38,7 @@ Resources:
       Tags:
         - Key: Name
           Value: MyPublicSubnet
+
   # Private Subnet
   MyPrivateSubnet:
     Type: AWS::EC2::Subnet
@@ -46,6 +49,7 @@ Resources:
       Tags:
         - Key: Name
           Value: MyPrivateSubnet
+          
   # Public Route Table
   MyPublicRouteTable:
     Type: AWS::EC2::RouteTable
