@@ -64,7 +64,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref MyVPC
-      CidrBlock: 10.0.2.1/24
+      CidrBlock: 10.0.2.0/24
       AvailabilityZone: us-east-2b
       Tags:
         - Key: Name
