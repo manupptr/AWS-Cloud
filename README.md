@@ -337,6 +337,8 @@ jobs:
       - run: sleep 20
       - run: aws cloudformation describe-stack-events --stack-name mycfnstack
       - run: aws cloudformation list-stacks
+```
+
 
 **Task:** creating the vpc with 2 public subnets and 2 private subnets attached to the public route and private route table and allowing the traffic for public subnets through internet gateway and for private subnets through NAT gateway
 ```
