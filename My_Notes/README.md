@@ -24,6 +24,7 @@ Overview working of cloudformation:
 
 **Overview of stack Creation:**
 
+![alt text](image.png)
 Template -----> CreateStack(API action) -----> Stack
 
 * By using the CreateStack API action,We will request the cloudFormation service to create a stack for our template
