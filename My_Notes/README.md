@@ -18,11 +18,11 @@ cloud formation API actions Reference will be in below documentation
 ```
 https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Operations.html
 ```
-**Overview working of cloudformation:**
+**Features of cloudformation:**
 
-**<u>Template:</u>** It is a text file written in either json or yaml format.it contains the required infrastructure resources that we want to create
+**1.<u>Template:</u>** It is a text file written in either json or yaml format.it contains the required infrastructure resources that we want to create
 
-**<u>stack:</u>** It is a group of resources
+**2.<u>stack:</u>** It is a group of resources
 
 
 **<u>Overview of stack Creation:</u>**
@@ -63,11 +63,19 @@ Outputs:
   set of outputs
 
 
-### *<u>From the above CFT format.The main necessary sections are</u>*
+**<u>From the above CFT format.The main necessary sections are</u>**
 
-**<u>AWSTemplateFormatVersion:</u> "version date"**
+<u>AWSTemplateFormatVersion:</u> "version date"
 
-**<u>Description:</u>** about template uses
+<u>Description:</u> about template uses
 
-**<u>Resources:</u>** resources shoud we need to create 
+<u>Resources:</u> resources shoud we need to create 
 
+
+**3.<u>Change-Sets:</u>** It previews the changes between old template and new template that what resources we are going to change or update in our infrastructure
+> it is very useful to find the errors before deploying the template into the production
+> we can rollback to the previous changes easily by updating the original template 
+
+**4.<u>Drift detection:</u>** it can indentify the changes of our AWS resources which differs from the resources specified in our cloudformation template
+
+**5.<u>Stack Sets:</u>**
