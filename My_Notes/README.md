@@ -74,6 +74,7 @@ Outputs:
 
 **3.<u>Change-Sets:</u>** It previews the changes between old template and new template that what resources we are going to change or update in our infrastructure
 > it is very useful to find the errors before deploying the template into the production
+
 > we can rollback to the previous changes easily by updating the original template 
 
 **4.<u>Drift detection:</u>** it can indentify the changes of our AWS resources which differs from the resources specified in our cloudformation template
