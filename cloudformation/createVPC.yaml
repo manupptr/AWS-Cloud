@@ -2,12 +2,24 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description:
   This template creates a vpc in selected region
   author: P.Manu
-  organization: TEST
+  organization: ABCD
+
+parameters:
+
+  vpccidrblock:
+    description: It changes the vpc cidr block to 172.16.0.0/16
+    type: string
+    default: 172.16.0.0/16
+  vpcavailabilityzone:
+    default: us-east-1
+
 Resources:
+
   MyCfnVPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: 172.168.0.0/16
+      CidrBlock: !Ref vpccidrblock
+      availabilityzone: !ref vpcavailabilityzone
       Tags:
       - Key: Name
         Value: MyOwnVPC
