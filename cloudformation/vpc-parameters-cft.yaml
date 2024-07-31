@@ -10,7 +10,7 @@ Parameters:
     Default: 192.168.255.0/16
   Availabilityzone:
     Type: string
-    description: it sets the availability zone for vpc
+    Description: it sets the availability zone for vpc
     Default: us-east-2
   VPCName:
     Type: String
