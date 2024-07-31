@@ -19,4 +19,4 @@ jobs:
           aws-region: us-east-2
       - run: aws cloudformation update-stack --stack-name stack-creates-vpc --template-body=file://cloudformation/vpc-parameters-cft.yaml
       - run: sleep 20
-      - run: aws cloudformation describe-stack-events --stack-name mycfnstack
+      - run: aws cloudformation describe-stack-events --stack-name stack-creates-vpc
