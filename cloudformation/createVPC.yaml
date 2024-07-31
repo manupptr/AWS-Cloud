@@ -3,16 +3,11 @@ Description:
   This template creates a vpc in selected region
   author:Manu
   organization:ABCD
-parameters:
-  vpccidrblock:
-    description: cirdblock modifying
-    type: string
-    default: 10.0.0.0/16
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: !Ref vpccidrblock
+      CidrBlock: 10.0.0.0/20
       Tags:
       - Key: Name
         Value: MyOwnVPC
