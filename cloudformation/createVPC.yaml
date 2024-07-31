@@ -7,7 +7,7 @@ Parameters:
   VpcCidr:
     Type: String
     Description: CIDR block for the VPC
-    default: 192.168.255.0/16
+    Default: 192.168.0.0/16
   NameTag:
     Type: String
     Description: Name tag for the VPC
