@@ -7,7 +7,7 @@ parameters:
   vpccidrblock:
     description: cirdblock modifying
     type: string
-    default: 192.168.0.0/16
+    default: 10.0.0.0/16
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
