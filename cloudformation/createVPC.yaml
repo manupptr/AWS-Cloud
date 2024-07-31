@@ -11,7 +11,7 @@ Parameters:
   VPCName:
     Type: String
     Description: Name tag for the VPC
-    Default: My-test-vpc
+    Default: My-test-vpc-1
   Environment:
     Type: String
     Description: Environment tag for the VPC
