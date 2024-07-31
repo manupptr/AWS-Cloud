@@ -8,15 +8,15 @@ Parameters:
     Type: String
     Description: CIDR block for the VPC
     Default: 192.168.255.0/16
-  NameTag:
+  VPCName:
     Type: String
     Description: Name tag for the VPC
     Default: My-test-vpc
-  EnvironmentTag:
+  Environment:
     Type: String
     Description: Environment tag for the VPC
     Default: prod
-  DepartmentTag:
+  Department:
     Type: String
     Description: Department tag for the VPC
     Default: HR
@@ -27,8 +27,8 @@ Resources:
       CidrBlock: !Ref VpcCidr
       Tags:
       - Key: Name
-        Value: !Ref NameTag
+        Value: !Ref VPCName
       - Key: environment
-        Value: !Ref EnvironmentTag
+        Value: !Ref Environment
       - Key: department
-        Value: !Ref DepartmentTag
+        Value: !Ref Department
