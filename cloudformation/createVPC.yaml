@@ -3,15 +3,29 @@ Description:
   This template creates a vpc in selected region
   author:Manu
   organization:ABCD
+Parameters:
+  VpcCidr:
+    Type: String
+    Description: CIDR block for the VPC
+    default: 192.168.255.0/16
+  NameTag:
+    Type: String
+    Description: Name tag for the VPC
+  EnvironmentTag:
+    Type: String
+    Description: Environment tag for the VPC
+  DepartmentTag:
+    Type: String
+    Description: Department tag for the VPC
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: 10.0.0.0/20
+      CidrBlock: !Ref VpcCidr
       Tags:
       - Key: Name
-        Value: MyOwnVPC
+        Value: !Ref NameTag
       - Key: environment
-        Value: Prod
+        Value: !Ref EnvironmentTag
       - Key: department
-        Value: DevOps
+        Value: !Ref DepartmentTag
