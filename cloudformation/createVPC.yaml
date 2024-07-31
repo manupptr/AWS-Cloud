@@ -10,8 +10,6 @@ parameters:
     description: It changes the vpc cidr block to 172.16.0.0/16
     type: string
     default: 172.16.0.0/16
-  vpcavailabilityzone:
-    default: us-east-1
 
 Resources:
 
@@ -19,7 +17,7 @@ Resources:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: !Ref vpccidrblock
-      availabilityzone: !ref vpcavailabilityzone
+      # availabilityzone: !ref vpcavailabilityzone
       Tags:
       - Key: Name
         Value: MyOwnVPC
