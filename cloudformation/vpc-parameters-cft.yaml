@@ -11,7 +11,7 @@ Parameters:
   Availabilityzone:
     Type: String
     Description: it sets the availability zone for vpc
-    Default: us-east-2
+    Default: us-east-2b
   VPCName:
     Type: String
     Description: Name tag for the VPC
