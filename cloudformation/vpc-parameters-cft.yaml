@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  This template creates a vpc in us-east-2 and modifies the properties by passing parameters
+  author:Manu
+  organization:ABCD
+Parameters:
+  VpcCidr:
+    Type: String
+    Description: CIDR block for the VPC
+    Default: 192.168.255.0/16
+  Availabilityzone:
+    Type: string
+    description: it sets the availability zone for vpc
+    Default: us-east-2
+  VPCName:
+    Type: String
+    Description: Name tag for the VPC
+    Default: My-test-vpc
+  Environment:
+    Type: String
+    Description: Environment tag for the VPC
+    Default: prod
+  Department:
+    Type: String
+    Description: Department tag for the VPC
+    Default: HR
+Resources:
+  MyCfnVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      Availabilityzone: !Ref Availabilityzone
+      Tags:
+      - Key: Name
+        Value: !Ref VPCName
+      - Key: environment
+        Value: !Ref Environment
+      - Key: department
+        Value: !Ref Department
