@@ -16,7 +16,7 @@ Parameters:
     Type: String
     Description: Environment tag for the VPC
     Default: prod
-  DepartmentTag:
+  Department:
     Type: String
     Description: Department tag for the VPC
     Default: HR
@@ -31,4 +31,4 @@ Resources:
       - Key: environment
         Value: !Ref Environment
       - Key: department
-        Value: !Ref DepartmentTag
+        Value: !Ref Department
