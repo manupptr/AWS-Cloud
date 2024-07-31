@@ -19,7 +19,7 @@ Parameters:
   DepartmentTag:
     Type: String
     Description: Department tag for the VPC
-    Default: IT
+    Default: HR
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
