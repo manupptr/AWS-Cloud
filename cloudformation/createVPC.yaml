@@ -11,12 +11,15 @@ Parameters:
   NameTag:
     Type: String
     Description: Name tag for the VPC
+    Default: My-test-vpc
   EnvironmentTag:
     Type: String
     Description: Environment tag for the VPC
+    Default: prod
   DepartmentTag:
     Type: String
     Description: Department tag for the VPC
+    Default: IT
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
