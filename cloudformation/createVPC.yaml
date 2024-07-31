@@ -8,7 +8,6 @@ Resources:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: !Ref vpccidrblock
-      availabilityzone: !ref vpcavailabilityzone
       Tags:
       - Key: Name
         Value: MyOwnVPC
