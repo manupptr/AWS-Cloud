@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description:
   This template creates a vpc in selected region
-  author: P.Manu
-  organization: ABCD
+  author:Manu
+  organization:ABCD
 
 parameters:
 
