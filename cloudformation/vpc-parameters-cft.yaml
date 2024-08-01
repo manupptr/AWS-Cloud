@@ -3,6 +3,7 @@ Description:
   This template creates a vpc in us-east-2 and modifies the properties by passing parameters
   author:Manu
   organization:ABCD
+  
 Parameters:
   VpcCidr:
     Type: String
@@ -24,6 +25,7 @@ Parameters:
     Type: String
     Description: it shows the purpose of the vpc
     Default: Application
+
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
