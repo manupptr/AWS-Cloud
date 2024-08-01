@@ -21,9 +21,9 @@ Parameters:
     Description: Department tag for the VPC
     Default: HR
   Purpose:
-    type: string
-    description: it shows the purpose of the vpc
-    default: Application
+    Type: string
+    Description: it shows the purpose of the vpc
+    Default: Application
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
