@@ -21,7 +21,7 @@ Parameters:
     Description: Department tag for the VPC
     Default: HR
   Purpose:
-    Type: string
+    Type: String
     Description: it shows the purpose of the vpc
     Default: Application
 Resources:
