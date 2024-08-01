@@ -8,10 +8,6 @@ Parameters:
     Type: String
     Description: CIDR block for the VPC
     Default: 192.168.255.0/16
-  Availabilityzone:
-    Type: String
-    Description: it sets the availability zone for vpc
-    Default: us-east-2
   VPCName:
     Type: String
     Description: Name tag for the VPC
@@ -19,17 +15,20 @@ Parameters:
   Environment:
     Type: String
     Description: Environment tag for the VPC
-    Default: prod
+    Default: staging
   Department:
     Type: String
     Description: Department tag for the VPC
     Default: HR
+  Purpose:
+    type: string
+    description: it shows the purpose of the vpc
+    default: Application
 Resources:
   MyCfnVPC:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: !Ref VpcCidr
-      Availabilityzone: !Ref Availabilityzone
       Tags:
       - Key: Name
         Value: !Ref VPCName
@@ -37,3 +36,5 @@ Resources:
         Value: !Ref Environment
       - Key: department
         Value: !Ref Department
+      - Key: Purpose
+        Value: !Ref Purpose
