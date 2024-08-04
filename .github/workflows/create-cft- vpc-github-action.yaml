@@ -17,6 +17,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
-      - run: aws cloudformation create-stack --stack-name stack-creates-vpc --template-body=file://cloudformation/createVPC-full-format.yaml
+      - run: aws cloudformation create-stack --stack-name cfn-init-stack --template-body=file://cloudformation/cfn-init&hup.yaml
       - run: sleep 20
-      - run: aws cloudformation describe-stack-events --stack-name stack-creates-vpc
+      - run: aws cloudformation describe-stack-events --stack-name cfn-init-stack
