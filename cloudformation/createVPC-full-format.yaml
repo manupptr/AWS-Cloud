@@ -1,6 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Template for creating a VPC with 2 private and 2 public subnets.
 
+Metadata:
+
 Parameters:
   VPCName:
     Type: String
@@ -26,10 +28,6 @@ Parameters:
     Type: String
     Default: 10.0.4.0/24
     Description: CIDR block for the second private subnet
-  InternetGatewayTag:
-    Type: String
-    Default: MyInternetGateway
-    Description: Tag for the Internet Gateway
 
 Resources:
   VPC:

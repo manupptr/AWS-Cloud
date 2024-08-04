@@ -1,0 +1,133 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to setup an EC2 instance with cfn-init and cfn-hup.
+
+Resources:
+  MyEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Metadata:
+      AWS::CloudFormation::Init:
+        config:
+          packages:
+            yum:
+              httpd: []       # Install Apache HTTP server
+              git: []
+              vim: []
+              python3: []    
+          files:
+            /var/www/html/index.html:
+              content: |
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Sample HTML Template</title>
+                    <link rel="stylesheet" href="styles.css">
+                </head>
+                <body>
+                    <header>
+                        <h1>MANU-KANUPARHTI</h1>
+                        <nav>
+                            <ul>
+                                <li><a href="#home">OUR Home</a></li>
+                                <li><a href="#about">LEMON GARDEN</a></li>
+                                <li><a href="#services">KP LAKE</a></li>
+                                <li><a href="#contact">KP STREETS</a></li>
+                            </ul>
+                        </nav>
+                    </header>
+                    <main>
+                        <section id="home">
+                            <h2>Home</h2>
+                            <p>This is the home section of the website.</p>
+                        </section>
+                        <section id="about">
+                            <h2>About</h2>
+                            <p>This is the about section of the website.</p>
+                        </section>
+                        <section id="services">
+                            <h2>Services</h2>
+                            <p>This is the services section of the website.</p>
+                        </section>
+                        <section id="contact">
+                            <h2>Contact</h2>
+                            <p>This is the contact section of the website.</p>
+                        </section>
+                    </main>
+                    <footer>
+                        <p>&copy; 2024 My Website</p>
+                    </footer>
+                    <script src="scripts.js"></script>
+                </body>
+                </html>
+              mode: '000644'
+              owner: 'root'
+              group: 'root'
+            /etc/cfn/cfn-hup.conf:
+              content: !Sub |
+                [main]
+                stack=${AWS::StackId}
+                region=${AWS::Region}
+                interval=5
+                verbose=true
+              mode: '000400'
+              owner: 'root'
+              group: 'root'
+            /etc/cfn/hooks.d/cfn-auto-reloader.conf:
+              content: !Sub |
+                [cfn-auto-reloader-hook]
+                triggers=post.update
+                path=Resources.MyEC2Instance.Metadata.AWS::CloudFormation::Init
+                action=/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
+                runas=root
+              mode: '000400'
+              owner: 'root'
+              group: 'root'
+          services:
+            sysvinit:
+              httpd:
+                enabled: true
+                ensureRunning: true
+              cfn-hup:
+                enabled: true
+                ensureRunning: true
+    Properties:
+      InstanceType: 't2.micro'
+      ImageId: 'ami-0c11a84584d4e09dd'  # Specify a valid AMI ID
+      KeyName: 'manupptr'  # Replace with your key pair name
+      SecurityGroups: 
+        - !Ref InstanceSecurityGroup
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          yum update -y aws-cfn-bootstrap
+          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
+          service cfn-hup start
+          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
+    CreationPolicy:
+      ResourceSignal:
+        Timeout: PT15M
+
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable SSH and HTTP access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+  InstanceId:
+    Description: The Instance ID
+    Value: !Ref MyEC2Instance
+  PublicIP:
+    Description: Public IP address of the instance
+    Value: !GetAtt 
+      - MyEC2Instance
+      - PublicIp
