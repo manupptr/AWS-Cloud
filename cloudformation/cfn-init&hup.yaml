@@ -3,7 +3,7 @@ Description: CloudFormation template to setup an EC2 instance with cfn-init and 
 
 Resources:
   MyEC2Instance:
-    Type: 'AWS::EC2::Instance'
+    Type: AWS::EC2::Instance
     Metadata:
       AWS::CloudFormation::Init:
         config:
