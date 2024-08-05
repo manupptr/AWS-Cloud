@@ -82,16 +82,16 @@ Resources:
           yum install -y aws-cfn-bootstrap
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
-    CreationPolicy:
-      ResourceSignal:
-        Timeout: PT15M  # 15 minutes
-    Tags:
+      Tags:
       - Key: Name
         Value: MyFreeInstance
       - Key: Environment
         Value: Development
       - Key: Project
         Value: MyProject
+    CreationPolicy:
+      ResourceSignal:
+        Timeout: PT15M  # 15 minutes
 
   InstanceProfile:
     Type: 'AWS::IAM::InstanceProfile'
