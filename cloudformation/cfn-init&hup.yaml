@@ -70,8 +70,8 @@ Resources:
                     - httpd
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-0c55b159cbfafe1f0  # Ensure this is a free tier eligible AMI ID
-      KeyName: my-key-pair  # Replace with your actual key pair name
+      ImageId: ami-0c11a84584d4e09dd  # Ensure this is a free tier eligible AMI ID
+      KeyName: manupptr  # Replace with your actual key pair name
       IamInstanceProfile: 
         Ref: InstanceProfile  # Reference to the instance profile to attach
       UserData:
@@ -82,6 +82,10 @@ Resources:
           yum install -y aws-cfn-bootstrap
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
+      CreationPolicy:
+        ResourceSignal:
+          Timeout: PT15M  # 15 minutes
+
       Tags:
         - Key: Name
           Value: MyFreeInstance
