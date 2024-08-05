@@ -89,6 +89,7 @@ Resources:
         Value: Development
       - Key: Project
         Value: MyProject
+
     CreationPolicy:
       ResourceSignal:
         Timeout: PT15M  # 15 minutes
@@ -119,8 +120,4 @@ Resources:
                   - cloudformation:DescribeStackResource
                   - cloudformation:SignalResource
                 Resource: "*"
-
-  Outputs:
-    InstanceId:
-      Description: The instance ID
-      Value: !Ref MyEC2Instance
+                
