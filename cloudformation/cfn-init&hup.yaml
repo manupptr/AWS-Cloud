@@ -16,7 +16,6 @@ Resources:
           files:
             /var/www/html/index.html:
               content: |
-                <!DOCTYPE html>
                 <html lang="en">
                 <head>
                     <meta charset="UTF-8">
@@ -92,9 +91,9 @@ Resources:
                 enabled: true
                 ensureRunning: true
     Properties:
-      InstanceType: 't2.micro'
-      ImageId: 'ami-0c11a84584d4e09dd'  # Specify a valid AMI ID
-      KeyName: 'manupptr'  # Replace with your key pair name
+      InstanceType: t2.micro
+      ImageId: ami-0c11a84584d4e09dd  # Specify a valid AMI ID
+      KeyName: manupptr  # Replace with your key pair name
       SecurityGroups: 
         - !Ref InstanceSecurityGroup
       UserData:
