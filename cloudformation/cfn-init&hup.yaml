@@ -120,7 +120,6 @@ Resources:
                   - cloudformation:DescribeStackResource
                   - cloudformation:SignalResource
                 Resource: "*"
-
 Outputs:
   InstanceId:
     Description: The instance ID
