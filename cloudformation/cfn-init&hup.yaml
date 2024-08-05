@@ -120,7 +120,7 @@ Resources:
                   - cloudformation:SignalResource
                 Resource: "*"
 
-Outputs:
-  InstanceId:
-    Description: The instance ID
-    Value: !Ref MyEC2Instance
+  Outputs:
+    InstanceId:
+      Description: The instance ID
+      Value: !Ref MyEC2Instance
