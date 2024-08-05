@@ -1,21 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: CloudFormation template to setup an EC2 instance with cfn-init and cfn-hup.
+Description: CloudFormation template to launch an EC2 instance with key-value tags and cfn-init.
 
 Resources:
   MyEC2Instance:
-    Type: AWS::EC2::Instance
+    Type: 'AWS::EC2::Instance'
     Metadata:
       AWS::CloudFormation::Init:
         config:
           packages:
             yum:
-              httpd: []       # Install Apache HTTP server
-              git: []
-              vim: []
-              python3: []    
+              httpd: []
           files:
             /var/www/html/index.html:
               content: |
+                <!DOCTYPE html>
                 <html lang="en">
                 <head>
                     <meta charset="UTF-8">
@@ -60,73 +58,66 @@ Resources:
                 </body>
                 </html>
               mode: '000644'
-              owner: 'root'
-              group: 'root'
-            /etc/cfn/cfn-hup.conf:
-              content: !Sub |
-                [main]
-                stack=${AWS::StackId}
-                region=${AWS::Region}
-                interval=5
-                verbose=true
-              mode: '000400'
-              owner: 'root'
-              group: 'root'
-            /etc/cfn/hooks.d/cfn-auto-reloader.conf:
-              content: !Sub |
-                [cfn-auto-reloader-hook]
-                triggers=post.update
-                path=Resources.MyEC2Instance.Metadata.AWS::CloudFormation::Init
-                action=/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
-                runas=root
-              mode: '000400'
-              owner: 'root'
-              group: 'root'
+              owner: root
+              group: root
           services:
             sysvinit:
               httpd:
                 enabled: true
                 ensureRunning: true
-              cfn-hup:
-                enabled: true
-                ensureRunning: true
+                packages:
+                  yum:
+                    - httpd
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-0c11a84584d4e09dd  # Specify a valid AMI ID
-      KeyName: manupptr  # Replace with your key pair name
-      SecurityGroups: 
-        - !Ref InstanceSecurityGroup
+      ImageId: ami-0c55b159cbfafe1f0  # Ensure this is a free tier eligible AMI ID
+      KeyName: my-key-pair  # Replace with your actual key pair name
+      IamInstanceProfile: 
+        Ref: InstanceProfile  # Reference to the instance profile to attach
       UserData:
         Fn::Base64: !Sub |
-          #!/bin/bash -xe
-          yum update -y aws-cfn-bootstrap
+          #!/bin/bash
+          exec > /var/log/user-data.log 2>&1
+          yum update -y
+          yum install -y aws-cfn-bootstrap
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
-          service cfn-hup start
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
-    CreationPolicy:
-      ResourceSignal:
-        Timeout: PT15M
+      Tags:
+        - Key: Name
+          Value: MyFreeInstance
+        - Key: Environment
+          Value: Development
+        - Key: Project
+          Value: MyProject
 
-  InstanceSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
+  InstanceProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties: 
+      Roles: 
+        - !Ref InstanceRole
+
+  InstanceRole:
+    Type: 'AWS::IAM::Role'
     Properties:
-      GroupDescription: Enable SSH and HTTP access
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: 80
-          ToPort: 80
-          CidrIp: 0.0.0.0/0
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: AllowCFN
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - cloudformation:DescribeStackResource
+                  - cloudformation:SignalResource
+                Resource: "*"
 
 Outputs:
   InstanceId:
-    Description: The Instance ID
+    Description: The instance ID
     Value: !Ref MyEC2Instance
-  PublicIP:
-    Description: Public IP address of the instance
-    Value: !GetAtt 
-      - MyEC2Instance
-      - PublicIp
