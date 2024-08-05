@@ -85,14 +85,13 @@ Resources:
     CreationPolicy:
       ResourceSignal:
         Timeout: PT15M  # 15 minutes
-
-      Tags:
-        - Key: Name
-          Value: MyFreeInstance
-        - Key: Environment
-          Value: Development
-        - Key: Project
-          Value: MyProject
+    Tags:
+      - Key: Name
+        Value: MyFreeInstance
+      - Key: Environment
+        Value: Development
+      - Key: Project
+        Value: MyProject
 
   InstanceProfile:
     Type: 'AWS::IAM::InstanceProfile'
@@ -120,6 +119,7 @@ Resources:
                   - cloudformation:DescribeStackResource
                   - cloudformation:SignalResource
                 Resource: "*"
+
 Outputs:
   InstanceId:
     Description: The instance ID
