@@ -100,6 +100,10 @@ Resources:
           ToPort: 22
           CidrIp: 0.0.0.0/0  # Consider limiting to your IP for better security
         - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 3.16.146.0/29  
+        - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0  # Allowing HTTP traffic from anywhere
