@@ -2,6 +2,24 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: CloudFormation template to launch an EC2 instance with key-value tags and cfn-init.
 
 Resources:
+  MySecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable SSH and HTTP access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0  # Allowing SSH from any IP (consider limiting to your IP for better security)
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 3.16.146.0/29  # Allowing SSH from EC2 Instance Connect service IP range
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0  # Allowing HTTP traffic from anywhere
+
   MyEC2Instance:
     Type: 'AWS::EC2::Instance'
     Metadata:
@@ -72,6 +90,8 @@ Resources:
       InstanceType: t2.micro
       ImageId: ami-0c11a84584d4e09dd  # Ensure this is a free tier eligible AMI ID
       KeyName: manupptr  # Replace with your actual key pair name
+      SecurityGroupIds:
+        - !Ref MySecurityGroup
       IamInstanceProfile: 
         Ref: InstanceProfile  # Reference to the instance profile to attach
       UserData:
@@ -89,24 +109,6 @@ Resources:
         Value: Development
       - Key: Project
         Value: MyProject
-
-  MySecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
-    Properties:
-      GroupDescription: Enable SSH  and HTTPD access
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0  # Consider limiting to your IP for better security
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 3.16.146.0/29  
-        - IpProtocol: tcp
-          FromPort: 80
-          ToPort: 80
-          CidrIp: 0.0.0.0/0  # Allowing HTTP traffic from anywhere
 
     CreationPolicy:
       ResourceSignal:
@@ -138,4 +140,3 @@ Resources:
                   - cloudformation:DescribeStackResource
                   - cloudformation:SignalResource
                 Resource: "*"
-                
