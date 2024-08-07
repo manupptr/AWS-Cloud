@@ -104,4 +104,5 @@ Resources:
                 Action:
                   - cloudformation:DescribeStackResource
                   - cloudformation:SignalResource
+                  - cloudformation:*
                 Resource: "*"
