@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: CloudFormation template to launch an EC2 instance with key-value tags and cfn-init.
+Description: CloudFormation template to launch an EC2 instance with key-value tags.
 
 Resources:
   MySecurityGroup:
@@ -11,10 +11,10 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0  # Allowing SSH from any IP (consider limiting to your IP for better security)
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 3.16.146.0/29  # Allowing SSH from EC2 Instance Connect service IP range
+        # - IpProtocol: tcp
+        #   FromPort: 22
+        #   ToPort: 22
+        #   CidrIp: 3.16.146.0/29  # Allowing SSH from EC2 Instance Connect service IP range
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
@@ -34,24 +34,6 @@ Resources:
               httpd: []
               aws-cfn-bootstrap: []
           files:
-            /etc/cfn/cfn-hup.conf:
-              content: !Sub |
-                [main]
-                stack=${AWS::StackId}
-                region=${AWS::Region}
-              mode: '000400'
-              owner: root
-              group: root
-            /etc/cfn/hooks.d/cfn-auto-reloader.conf:
-              content: !Sub |
-                [cfn-auto-reloader-hook]
-                triggers=post.update
-                path=Resources.MyEC2Instance.Metadata.AWS::CloudFormation::Init
-                action=/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
-                runas=root
-              mode: '000400'
-              owner: root
-              group: root
             /var/www/html/index.html:
               content: |
                 <html>
@@ -69,12 +51,6 @@ Resources:
                 packages:
                   yum:
                     - httpd
-              cfn-hup:
-                enabled: true
-                ensureRunning: true
-                files:
-                  - /etc/cfn/cfn-hup.conf
-                  - /etc/cfn/hooks.d/cfn-auto-reloader.conf
     Properties:
       InstanceType: t2.micro
       ImageId: ami-0c11a84584d4e09dd  # Ensure this is a free tier eligible AMI ID
@@ -91,7 +67,6 @@ Resources:
           yum install -y aws-cfn-bootstrap
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource MyEC2Instance --region ${AWS::Region}
-          service cfn-hup start
       Tags:
       - Key: Name
         Value: MyFree-Instance
