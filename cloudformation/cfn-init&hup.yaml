@@ -94,7 +94,7 @@ Resources:
           service cfn-hup start
       Tags:
       - Key: Name
-        Value: MyFreeInstance
+        Value: MyFree-Instance
       - Key: Environment
         Value: Development
       - Key: Project
