@@ -340,7 +340,7 @@ jobs:
 ```
  
 ### **Task:** creating the vpc with 2 public subnets and 2 private subnets attached to the public and private route table and allowing the traffic for public subnets through internet gateway and for private subnets through NAT gateway USing the Below template
-````
+```
 AWSTemplateFormatVersion: '2010-09-09'
 Description: VPC project
 
@@ -491,3 +491,43 @@ Resources:
     Properties:
       SubnetId: !Ref MyPrivateSubnet2
       RouteTableId: !Ref MyPrivateRouteTable
+```
+
+### Making changes to the vpc resource using parameters
+```
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  This template creates a vpc in selected region
+  author:Manu
+  organization:ABCD
+Parameters:
+  VpcCidr:
+    Type: String
+    Description: CIDR block for the VPC
+    Default: 192.168.0.0/16
+  VPCName:
+    Type: String
+    Description: Name tag for the VPC
+    Default: My-test-vpc-1
+  Environment:
+    Type: String
+    Description: Environment tag for the VPC
+    Default: prod
+  Department:
+    Type: String
+    Description: Department tag for the VPC
+    Default: HR
+
+Resources:
+  MyCfnVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      Tags:
+      - Key: Name
+        Value: !Ref VPCName
+      - Key: environment
+        Value: !Ref Environment
+      - Key: department
+        Value: !Ref Department
+```
