@@ -43,6 +43,7 @@ Resources:
                   <head><title>My World</title></head>
                   <body>
                     <h1>Hello from CloudFormation!</h1>
+                    <h2>How are you</h2>
                   </body>
                 </html>
               mode: '000644'
