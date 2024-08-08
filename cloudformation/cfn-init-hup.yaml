@@ -32,6 +32,9 @@ Resources:
             yum:
               httpd: []
               htop: []
+          commands:
+            log-htop-install:
+              command: "echo 'htop installed successfully' >> /var/log/cfn-init.log"
           files:
             /var/www/html/index.html:
               content: !Sub |
