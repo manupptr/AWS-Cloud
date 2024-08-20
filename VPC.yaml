@@ -11,5 +11,4 @@ Resources:
       EnableDnsHostnames: 'true'
       Tags: 
         - Key: Name
-          Value: MyVPC
-kdnfkjsdbvmsbvjhbjfhbvdfjbvfjb
+          Value: vpc
