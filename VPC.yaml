@@ -1,14 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: AWS CloudFormation template to create a VPC with public and private subnets, an Internet Gateway, and route tables.
+Description: Basic VPC setup with public and private subnets.
 
 Resources:
-  # VPC
-  MyVPC:
+  VPC:
     Type: 'AWS::EC2::VPC'
-    Properties: 
+    Properties:
       CidrBlock: '10.0.0.0/16'
-      EnableDnsSupport: 'true'
-      EnableDnsHostnames: 'true'
-      Tags: 
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
         - Key: Name
-          Value: vpc
+          Value: MyVPC
